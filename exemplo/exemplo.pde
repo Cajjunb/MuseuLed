@@ -32,7 +32,26 @@ void setup(){
       //if((y % 2 == 0 && x % 2 == 0) || (y % 2 == 1 && x % 2 == 1)){
         Cell cell = cellArray[y][x];
         cells.add(cell);
-        if(x != 0 && y != 0){
+        //Adicionando vizinhos as celulas
+        if( x > 0){
+          //Vizinho da esquerda
+          cell.addToNeighbors(cellArray[y][x-1]);
+        }
+        if(x < 49){
+          //Vizinho da direita
+          cell.addToNeighbors(cellArray[y][x+1]);
+        }
+        if( y > 0){
+          //Vizinho de cima
+          cell.addToNeighbors(cellArray[y-1][x]);
+        }
+        if(y < 49){
+          //Vizinho de baixo
+          cell.addToNeighbors(cellArray[y+1][x]);
+        }
+       
+        //DIAGONAIS
+        /*if(x != 0 && y != 0){
           cell.addToNeighbors(cellArray[y - 1][x - 1]);
         }
         if(x != 0 && y != 50 - 1){
@@ -43,7 +62,8 @@ void setup(){
         }
         if(x != 50 - 1 && y != 50 - 1){
           cell.addToNeighbors(cellArray[y + 1][x + 1]);
-        }       
+        } 
+        */
       //}
     }
   }
@@ -95,10 +115,19 @@ class Cell {
      
     float diffusedEnergy = energy * 0.1;
     energy -= diffusedEnergy;
-    for(Cell neighbor: neighbors){
+    /*for(Cell neighbor: neighbors){
       neighbor.absorbEnergy(diffusedEnergy / 5.0);
     }
+    */
   }
+  
+   void reproductCell(){
+    /*for(Cell neighbor: neighbors){
+      neighbor.absorbEnergy(diffusedEnergy / 5.0);
+    }
+    */
+  }
+  
    
   void absorbEnergy(float e){
     absorbedEnergy += e;   
