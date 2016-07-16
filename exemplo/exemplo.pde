@@ -2,12 +2,16 @@ ArrayList<Cell> cells;
 ArrayList<Cell> cellsAlive;
 ArrayList<Cell> comidas;
 
+int randomSeed;
+
+int semaforo = 0;
+
 
 /* ################################ SETUP #############################*/
 void setup(){
   size(500, 500);
   smooth();
-  frameRate(30);
+  frameRate(60);
   colorMode(HSB, 360, 100, 100);
    
   Cell[][] cellArray = new Cell[50][50];
@@ -22,7 +26,7 @@ void setup(){
   /*####################### SETANDO ARRAYS GLOBAIS ###############*/
   cells = new ArrayList<Cell>();
   comidas = new ArrayList<Cell>();
-  cellsAlive = new ArrayList<Cell>(); 
+  cellsAlive = new ArrayList<Cell>();
   /*####################### SETANDO ARRAYS GLOBAIS ###############*/
   for(int y = 0; y < 50; y++){
     for(int x = 0; x < 50; x++){
@@ -46,22 +50,10 @@ void setup(){
           //Vizinho de baixo
           cell.addToNeighbors(cellArray[y+1][x]);
         }
+        
+        //colocando o indice no array
+        cell.index = y * 49 + x ;
        
-        //DIAGONAIS
-        /*if(x != 0 && y != 0){
-          cell.addToNeighbors(cellArray[y - 1][x - 1]);
-        }
-        if(x != 0 && y != 50 - 1){
-          cell.addToNeighbors(cellArray[y + 1][x - 1]);
-        }
-        if(x != 50 - 1 && y != 0){
-          cell.addToNeighbors(cellArray[y - 1][x + 1]);
-        }
-        if(x != 50 - 1 && y != 50 - 1){
-          cell.addToNeighbors(cellArray[y + 1][x + 1]);
-        } 
-        */
-      //}
     }
   }
   int random = 0;
@@ -70,40 +62,49 @@ void setup(){
     cells.get(random).fillUpEnergy() ;
   }
   */
-  
+  registerMethod("pre", this);
+  semaforo =  1 ; 
   cells.get(22).fillUpEnergy();
-  cells.get(2093).fillUpEnergy();
-  cells.get(551).fillUpEnergy();
-  cells.get(1061).fillUpEnergy();
-  cells.get(869).fillUpEnergy();
-  cells.get(1987).fillUpEnergy();
+  cells.get(2093).becomeFoodCell();
+  cells.get(551).becomeFoodCell();
+  cells.get(1061).becomeFoodCell();
+  cells.get(869).becomeFoodCell();
+  cells.get(1987).becomeFoodCell();
 }
  
 /*############################## DRAW *********************************/
 void draw(){
-  background(0, 0, 10);
-  
-     
-  if(random(3.0)<1)
-    cells.get(int(random(cells.size()))).becomeFoodCell();
-  
-  for(Cell comida : comidas){
-    comida.expireFood();
-  }
+  background(0, 0, 10); 
   for(Cell cell: cells){
     cell.display();
   }
-   
-  /*for(Cell cell: cells){
-    cell.diffuseEnergy();
-  }
-  */ 
-  for(Cell cell: cells){
-    cell.update();
-  }
-  
-  if(random(3.0)<1)
-    cells.get(int(random(cells.size()))).fillUpEnergy();
   
     
+}
+
+
+/*######################## Controladora de toda a logica da simulação #######################*/
+void pre(){
+  
+  if(random(5.0)<1)
+    cells.get(int(random(cells.size()))).becomeFoodCell();
+  
+  if(random(5.0)<1)
+    cells.get(int(random(cells.size()))).fillUpEnergy();
+   
+  for(int i = comidas.size() - 1; i >= 0; i-- ){
+    comidas.get(i).expireFood();
+  }
+  /*
+  for(Cell cell: cellsAlive){
+    cell.farejarComida();
+  }   
+  */
+  /*
+  for(Cell cell: cellsAlive){
+    cell.diffuseEnergy();
+  }
+*/
+  
+
 }
