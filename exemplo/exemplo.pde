@@ -103,10 +103,8 @@ void pre(){
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
     cellsAlive.get(i).farejarComida();
   } 
-  
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
-    cellsAlive.get(i).farejarComidaTeste();
+    cellsAlive.get(i).movimentoRandomico();
   } 
-  
 
 }

@@ -44,11 +44,10 @@ class Cell {
   }
   
   /*Metodo de teste para verificar se as celulas estavam andando para a esquerda*/
-  void farejarComidaTeste(){
-    int loop = 0 ;
+  void movimentoRandomico(){
     if(this.pathComida == -1){
       for(Cell vizinho: this.neighbors){
-        if(random(5.0) < 0.5 && !vizinho.estaVivo){
+        if(random(5.0) < 0.5){
           vizinho.fillUpEnergy();
           this.celularDeath();
           break;
@@ -133,12 +132,12 @@ class Cell {
       ArrayList<Cell> listaCelulas = new ArrayList<Cell>();
       listaCelulas.add(this);
       /*Acesso em largura http://www.di.uevora.pt/~vp/ada/grafos.pdf */
-      while(listaCelulas.isEmpty() ){
+      while(!listaCelulas.isEmpty() ){
         Cell auxiliar = listaCelulas.get(0); // int 
         /*LOOP DE Setar Vizinhos*/
         for(Cell vizinho: auxiliar.neighbors){
           /*IMPEDIR O LOOP INFINITO*/
-          if(auxiliar.pathComida == 3)
+          if(auxiliar.pathComida == 4)
             break;
           if(vizinho.pathComida == -1){
             vizinho.pathComida = auxiliar.pathComida + 1 ;
