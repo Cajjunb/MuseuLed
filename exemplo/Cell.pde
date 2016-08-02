@@ -19,6 +19,7 @@ class Cell {
     this.ehcomida = false;
     this.estaVivo = false;
     pathComida = -1;
+    this. index = 2;
   }
    
   void addToNeighbors(Cell cell){
@@ -31,6 +32,7 @@ class Cell {
     this.ehcomida = false;
     /*ADICIONANDO PARA REFERENCIA DE CELULAS VIVAS*/
     cellsAlive.add(this);  
+    this. index = 2;
   }
   
   
@@ -41,14 +43,39 @@ class Cell {
     cellsAlive.remove(this);
   }
   
+  /*Metodo de teste para verificar se as celulas estavam andando para a esquerda*/
+  void farejarComidaTeste(){
+    int loop = 0 ;
+    for(Cell vizinho: this.neighbors){
+      if(random(5.0) < 0.5){
+        vizinho.fillUpEnergy();
+        this.celularDeath();
+        print("\t BREAK! loop =",loop ,"\n");
+        break;
+        }
+      }
+  }
+  /*Metodo que detecta se ha comida num espaco de 3x3 e se move em direcao a ele*/
   void farejarComida(){
+    int direcao = 0;
+    String direcao_text;
     if(this.pathComida != -1){
       for(Cell vizinho: this.neighbors){
-        if(vizinho.pathComida > -1 && vizinho.pathComida < this.pathComida && !vizinho.estaVivo && vizinho.pathComida != 0){
+        if(vizinho.pathComida > 0 && vizinho.pathComida < this.pathComida && !vizinho.estaVivo){
           vizinho.fillUpEnergy();
+          if(direcao == 0)
+              direcao_text = "\tEsquerda\n";
+          else if (direcao == 1)
+              direcao_text = "\tDireita\n";
+          else if (direcao == 2)
+              direcao_text = "\tCima\n";
+          else 
+              direcao_text = "\tBaixo\n";
+          print("\tACHEI UM VIZINHO MAIS PERTO = ",direcao_text,"\n");
           this.celularDeath();
           break;
         }
+        direcao++;
       }
     }
   }  
@@ -73,7 +100,7 @@ class Cell {
   }
   
     void expireFood(){
-      float diffusedEnergy = energy * 0.0001;
+      float diffusedEnergy = energy * 0.001;
       this.energy -= diffusedEnergy;
       if(energy < 0.001){
         comidas.remove(this);
@@ -129,14 +156,8 @@ class Cell {
     noStroke();
     float brightness = map(energy*5, 0, 1, 30, 100);
     if(this.ehcomida )
-      fill(#8B0000);
-    else if(this.pathComida == 3)
-      fill(#832000);
-    else if(this.pathComida == 2)
-      fill(#812000);
-    else if(this.pathComida == 1)
-      fill(#802000);
-    else if(this.pathComida == -1)
+      fill(20, 50, 50);
+    else
       fill(180, 100, brightness);
     rect(this.pos.x, this.pos.y, 25, 25);
   }

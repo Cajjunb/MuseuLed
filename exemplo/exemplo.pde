@@ -9,9 +9,9 @@ int semaforo = 0;
 
 /* ################################ SETUP #############################*/
 void setup(){
-  size(500, 500);
+  size(500, 500,P2D);
   smooth();
-  frameRate(60);
+  frameRate(30);
   colorMode(HSB, 360, 100, 100);
    
   Cell[][] cellArray = new Cell[50][50];
@@ -95,16 +95,15 @@ void pre(){
   for(int i = comidas.size() - 1; i >= 0; i-- ){
     comidas.get(i).expireFood();
   }
-  /*
-  for(Cell cell: cellsAlive){
-    cell.farejarComida();
-  }   
-  */
-  /*
-  for(Cell cell: cellsAlive){
-    cell.diffuseEnergy();
+  
+  for(int i = cellsAlive.size()- 1; i>=0 ; i--){
+    cellsAlive.get(i).diffuseEnergy();
   }
-*/
+  
+  for(int i = cellsAlive.size()- 1; i>=0 ; i--){
+    cellsAlive.get(i).farejarComidaTeste();
+  } 
+  
   
 
 }
