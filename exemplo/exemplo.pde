@@ -86,10 +86,10 @@ void draw(){
 /*######################## Controladora de toda a logica da simulação #######################*/
 void pre(){
   
-  if(random(5.0)<1)
+  if(random(1.2)<1)
     cells.get(int(random(cells.size()))).becomeFoodCell();
   
-  if(random(5.0)<1)
+  if(random(3.0)<1)
     cells.get(int(random(cells.size()))).fillUpEnergy();
    
   for(int i = comidas.size() - 1; i >= 0; i-- ){
@@ -101,9 +101,12 @@ void pre(){
   }
   
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
-    cellsAlive.get(i).farejarComidaTeste();
+    cellsAlive.get(i).farejarComida();
   } 
   
+  for(int i = cellsAlive.size()- 1; i>=0 ; i--){
+    cellsAlive.get(i).farejarComidaTeste();
+  } 
   
 
 }
