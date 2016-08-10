@@ -2,18 +2,26 @@ ArrayList<Cell> cells;
 ArrayList<Cell> cellsAlive;
 ArrayList<Cell> comidas;
 
-int randomSeed;
-
-int semaforo = 0;
-
+//Camera Objeot
+Capture cam;
 
 /* ################################ SETUP #############################*/
 void setup(){
-  size(500, 500,P2D);
+  size(1140, 980,P2D);
   smooth();
-  frameRate(30);
+  frameRate(40);
   colorMode(HSB, 360, 100, 100);
+ 
    
+  String[] cameras = Capture.list();
+  if(cameras.length == 0){
+    println("\tERRO nao temos cameras no momento!\n");
+    exit();
+  }
+  else{
+      cam = new Capture(this,cameras[0]);
+      cam.start();
+  }
   Cell[][] cellArray = new Cell[50][50];
   for(int y = 0; y < 50; y++){
     for(int x = 0; x < 50; x++){
@@ -63,7 +71,6 @@ void setup(){
   }
   */
   registerMethod("pre", this);
-  semaforo =  1 ; 
   cells.get(22).fillUpEnergy();
   cells.get(2093).becomeFoodCell();
   cells.get(551).becomeFoodCell();
@@ -78,28 +85,35 @@ void draw(){
   for(Cell cell: cells){
     cell.display();
   }
-  
-    
+  if (cam.available() == true) {
+    cam.read();
+  }
+  image(cam, 500, 500);
 }
 
 
 /*######################## Controladora de toda a logica da simulação #######################*/
 void pre(){
+  int aux = int(random(cells.size()));
+  if(random(100.0)<1){
+    cells.get(aux).becomeFoodCell();
+    print("\t CRIEI COMIDA i =  ",aux/50," j = ",aux%50,"\n");
+  }  
   
-  if(random(1.2)<1)
-    cells.get(int(random(cells.size()))).becomeFoodCell();
-  
-  if(random(3.0)<1)
+  if(random(100.0)<1)
     cells.get(int(random(cells.size()))).fillUpEnergy();
-   
-  for(int i = comidas.size() - 1; i >= 0; i-- ){
+  
+  /*for(int i = comidas.size() - 1; i >= 0; i-- ){
     comidas.get(i).expireFood();
   }
-  
+  */
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
     cellsAlive.get(i).diffuseEnergy();
   }
-  
+  for(int i = cellsAlive.size()- 1; i>=0 ; i--){
+    if(random(1000.0)<1)
+      cellsAlive.get(i).reproducaoCelular();
+  }
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
     cellsAlive.get(i).farejarComida();
   } 
