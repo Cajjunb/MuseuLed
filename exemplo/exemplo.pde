@@ -7,14 +7,14 @@ Capture cam;
 
 /* ################################ SETUP #############################*/
 void setup(){
-  size(1140, 980,P2D);
+  size(800, 640,P2D);
   smooth();
   frameRate(40);
   colorMode(HSB, 360, 100, 100);
  
    
-  String[] cameras = Capture.list();
-  if(cameras.length == 0){
+  //String[] cameras = Capture.list();
+  /*if(cameras.length == 0){
     println("\tERRO nao temos cameras no momento!\n");
     exit();
   }
@@ -22,9 +22,10 @@ void setup(){
       cam = new Capture(this,cameras[0]);
       cam.start();
   }
-  Cell[][] cellArray = new Cell[50][50];
-  for(int y = 0; y < 50; y++){
-    for(int x = 0; x < 50; x++){
+  */
+  Cell[][] cellArray = new Cell[25][25];
+  for(int y = 0; y < 25; y++){
+    for(int x = 0; x < 25; x++){
       //if((y % 2 == 0 && x % 2 == 0) || (y % 2 == 1 && x % 2 == 1)){
         PVector pos = new PVector(x * 25, y * 25);
         cellArray[y][x] = new Cell(pos);
@@ -36,8 +37,8 @@ void setup(){
   comidas = new ArrayList<Cell>();
   cellsAlive = new ArrayList<Cell>();
   /*####################### SETANDO ARRAYS GLOBAIS ###############*/
-  for(int y = 0; y < 50; y++){
-    for(int x = 0; x < 50; x++){
+  for(int y = 0; y < 25; y++){
+    for(int x = 0; x < 25; x++){
       //if((y % 2 == 0 && x % 2 == 0) || (y % 2 == 1 && x % 2 == 1)){
         Cell cell = cellArray[y][x];
         cells.add(cell);
@@ -46,7 +47,7 @@ void setup(){
           //Vizinho da esquerda
           cell.addToNeighbors(cellArray[y][x-1]);
         }
-        if(x < 49){
+        if(x < 24){
           //Vizinho da direita
           cell.addToNeighbors(cellArray[y][x+1]);
         }
@@ -54,7 +55,7 @@ void setup(){
           //Vizinho de cima
           cell.addToNeighbors(cellArray[y-1][x]);
         }
-        if(y < 49){
+        if(y < 24){
           //Vizinho de baixo
           cell.addToNeighbors(cellArray[y+1][x]);
         }
@@ -72,11 +73,11 @@ void setup(){
   */
   registerMethod("pre", this);
   cells.get(22).fillUpEnergy();
-  cells.get(2093).becomeFoodCell();
+  cells.get(600).becomeFoodCell();
   cells.get(551).becomeFoodCell();
-  cells.get(1061).becomeFoodCell();
-  cells.get(869).becomeFoodCell();
-  cells.get(1987).becomeFoodCell();
+  cells.get(221).becomeFoodCell();
+  cells.get(419).becomeFoodCell();
+  cells.get(311).becomeFoodCell();
 }
  
 /*############################## DRAW *********************************/
@@ -85,10 +86,11 @@ void draw(){
   for(Cell cell: cells){
     cell.display();
   }
-  if (cam.available() == true) {
+  /*if (cam.available() == true) {
     cam.read();
   }
   image(cam, 500, 500);
+  */
 }
 
 
@@ -97,7 +99,7 @@ void pre(){
   int aux = int(random(cells.size()));
   if(random(100.0)<1){
     cells.get(aux).becomeFoodCell();
-    print("\t CRIEI COMIDA i =  ",aux/50," j = ",aux%50,"\n");
+    print("\t CRIEI COMIDA i =  ",aux/50," j = ",aux%25,"\n");
   }  
   
   if(random(100.0)<1)
