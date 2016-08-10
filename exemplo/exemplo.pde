@@ -7,14 +7,14 @@ Capture cam;
 
 /* ################################ SETUP #############################*/
 void setup(){
-  size(800, 640,P2D);
+  size(1200, 625,P2D);
   smooth();
   frameRate(40);
   colorMode(HSB, 360, 100, 100);
  
    
-  //String[] cameras = Capture.list();
-  /*if(cameras.length == 0){
+  String[] cameras = Capture.list();
+  if(cameras.length == 0){
     println("\tERRO nao temos cameras no momento!\n");
     exit();
   }
@@ -22,7 +22,6 @@ void setup(){
       cam = new Capture(this,cameras[0]);
       cam.start();
   }
-  */
   Cell[][] cellArray = new Cell[25][25];
   for(int y = 0; y < 25; y++){
     for(int x = 0; x < 25; x++){
@@ -86,11 +85,10 @@ void draw(){
   for(Cell cell: cells){
     cell.display();
   }
-  /*if (cam.available() == true) {
+  if (cam.available() == true) {
     cam.read();
   }
-  image(cam, 500, 500);
-  */
+  image(cam, 625, 0);
 }
 
 
