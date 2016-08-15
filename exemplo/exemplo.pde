@@ -3,7 +3,7 @@ ArrayList<Cell> cellsAlive;
 ArrayList<Cell> comidas;
 
 //Camera Objeot
-Capture cam;
+cameraInput camera;
 
 /* ################################ SETUP #############################*/
 void setup(){
@@ -11,17 +11,10 @@ void setup(){
   smooth();
   frameRate(40);
   colorMode(HSB, 360, 100, 100);
- 
    
-  String[] cameras = Capture.list();
-  if(cameras.length == 0){
-    println("\tERRO nao temos cameras no momento!\n");
-    exit();
-  }
-  else{
-      cam = new Capture(this,cameras[0]);
-      cam.start();
-  }
+  //Instancia o controlador da camera 
+  camera = new cameraInput(this);
+  
   Cell[][] cellArray = new Cell[25][25];
   for(int y = 0; y < 25; y++){
     for(int x = 0; x < 25; x++){
@@ -64,7 +57,6 @@ void setup(){
        
     }
   }
-  int random = 0;
   /*for(int i = 0; i < 10; i++){
     random = int(random(cells.size()-1));
     cells.get(random).fillUpEnergy() ;
@@ -77,6 +69,9 @@ void setup(){
   cells.get(221).becomeFoodCell();
   cells.get(419).becomeFoodCell();
   cells.get(311).becomeFoodCell();
+  
+  //CAPTURA PRIMEIOR FRAM DE IMAGEM DA CAMERA
+  camera.capturaFrame();
 }
  
 /*############################## DRAW *********************************/
@@ -85,10 +80,9 @@ void draw(){
   for(Cell cell: cells){
     cell.display();
   }
-  if (cam.available() == true) {
-    cam.read();
-  }
-  image(cam, 625, 0);
+    
+  //camera Objeto desenha os frames da camera
+  camera.desenhaCamera();
 }
 
 
@@ -97,28 +91,38 @@ void pre(){
   int aux = int(random(cells.size()));
   if(random(100.0)<1){
     cells.get(aux).becomeFoodCell();
-    print("\t CRIEI COMIDA i =  ",aux/50," j = ",aux%25,"\n");
+    print("\t CRIEI COMIDA i =  ",aux/25," j = ",aux%25,"\n");
   }  
   
-  if(random(100.0)<1)
+  
+  /*Detecta movimento e faz com que apareca celulas!*/
+  if(camera.cameraMovimento())
     cells.get(int(random(cells.size()))).fillUpEnergy();
   
   /*for(int i = comidas.size() - 1; i >= 0; i-- ){
     comidas.get(i).expireFood();
   }
   */
+  
+  /*Envelhece as celulas e faz elas morrerem por inatividade*/
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
     cellsAlive.get(i).diffuseEnergy();
   }
+  
+  /*Roda a chance de cada celula se reproduzir, tem menos q 0,1% de chance*/
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
     if(random(1000.0)<1)
       cellsAlive.get(i).reproducaoCelular();
   }
+  /*Celulas farejam a comida*/
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
     cellsAlive.get(i).farejarComida();
   } 
+  
+  /*Celulas se movimentam aleatoriamente*/
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
     cellsAlive.get(i).movimentoRandomico();
   } 
-
+ 
+ 
 }

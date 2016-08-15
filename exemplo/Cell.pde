@@ -53,8 +53,8 @@ class Cell {
           this.pathComida = vizinho.pathComida;
           this.celularDeath();
           break;
-          }
         }
+      }
     }
   }
   /* reproducao da celula MITOSE OU MEIOSE*/
@@ -81,9 +81,9 @@ class Cell {
   }  
   
   void diffuseEnergy(){
-    float diffusedEnergy = energy * 0.01;
+    float diffusedEnergy = energy * 0.1;
     energy -= diffusedEnergy;
-    if(energy < 0.01){
+    if(energy < 0.1){
       this.celularDeath();
     }
     /*for(Cell neighbor: neighbors){
@@ -171,5 +171,4 @@ class Cell {
     rect(this.pos.x, this.pos.y, 25, 25);
   }
   
-
 }
