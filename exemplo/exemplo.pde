@@ -70,8 +70,7 @@ void setup(){
   cells.get(419).becomeFoodCell();
   cells.get(311).becomeFoodCell();
   
-  //CAPTURA PRIMEIOR FRAM DE IMAGEM DA CAMERA
-  camera.capturaFrame();
+  
 }
  
 /*############################## DRAW *********************************/

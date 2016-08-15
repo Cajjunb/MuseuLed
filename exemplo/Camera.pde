@@ -15,14 +15,17 @@ class cameraInput {
       exit();
     }
     else{
-        this.cameraPrincipal = new Capture(ambiente,cameras[0]);
+        this.cameraPrincipal = new Capture(ambiente,320,240,30);
         this.cameraPrincipal.start();
+        this.frameAnterior = createImage(this.cameraPrincipal.width, this.cameraPrincipal.height, RGB);
     }
   }
   // Funcao que guarda o frame para ser calculado a diferenca depois
   void capturaFrame(){
-    this.frameAnterior = createImage(this.cameraPrincipal.width, this.cameraPrincipal.height, RGB);
+    //this.frameAnterior = createImage(this.cameraPrincipal.width, this.cameraPrincipal.height, RGB);
   }
+
+
 // Funcao que verifica se esta funcionando e desenha o conteudo na tela
   boolean cameraMovimento(){
     // Componentes da Imagem em rgb do frame atual e o anterior
@@ -66,17 +69,14 @@ class cameraInput {
       return false;
   }
   
-  
+  // funcao que faz o output da camera e guarda o frames para o tracking da camera
   void desenhaCamera(){
     if (camera.cameraPrincipal.available() == true) {  
-      this.frameAnterior.copy();
+      this.frameAnterior.copy(this.cameraPrincipal,0,0,this.cameraPrincipal.width,this.cameraPrincipal.height,0,0,this.cameraPrincipal.width,this.cameraPrincipal.height);
       this.frameAnterior.updatePixels();
       this.cameraPrincipal.read();
     }
     image(this.cameraPrincipal,625 , 0);
-    image(this.frameAnterior,625,300);
-    
-    //CAPTURA  FRAME DE IMAGEM DA CAMERA
-    this.capturaFrame();
-    }
+    image(this.frameAnterior,625,300 );
+  }
 }
