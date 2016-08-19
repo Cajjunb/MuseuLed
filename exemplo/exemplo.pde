@@ -88,20 +88,29 @@ void draw(){
 /*######################## Controladora de toda a logica da simulação #######################*/
 void pre(){
   int aux = int(random(cells.size()));
+  int auxPixel ;
   if(random(100.0)<1){
     cells.get(aux).becomeFoodCell();
     print("\t CRIEI COMIDA i =  ",aux/25," j = ",aux%25,"\n");
   }  
   
-  
   /*Detecta movimento e faz com que apareca celulas!*/
   if(camera.cameraMovimento())
-    cells.get(int(random(cells.size()))).fillUpEnergy();
+   cells.get(int(random(cells.size()))).fillUpEnergy();
+  
+  /*// Apos o tracking faz ficar vivas os pixels que tem movimento detectado
+  auxPixel = ((camera.getPixelDetectado()) * 625 / camera.cameraPrincipal.width * 25);
+  while(auxPixel > -1){
+    cells.get(auxPixel).fillUpEnergy();
+    auxPixel = ((camera.getPixelDetectado()) * 625 / camera.cameraPrincipal.width*25);
+  }
+  */
+  
+  
   
   /*for(int i = comidas.size() - 1; i >= 0; i-- ){
     comidas.get(i).expireFood();
-  }
-  */
+  }*/
   
   /*Envelhece as celulas e faz elas morrerem por inatividade*/
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){

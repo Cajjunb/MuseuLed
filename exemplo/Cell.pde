@@ -39,6 +39,7 @@ class Cell {
   
   
   void celularDeath(){
+    print("\tMORRI!\n");
     this.energy = 0;
     this.estaVivo = false;
     cellsAlive.remove(this);
@@ -100,9 +101,9 @@ class Cell {
   }
   
     void expireFood(){
-      float diffusedEnergy = energy * 0.001;
+      float diffusedEnergy = energy * 0.000001;
       this.energy -= diffusedEnergy;
-      if(energy < 0.001){
+      if(energy < 0.000001){
         comidas.remove(this);
         this.ehcomida = false;
         for(Cell neighbor: neighbors){

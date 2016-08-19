@@ -6,6 +6,7 @@ class cameraInput {
   //Camera Objeot
   Capture cameraPrincipal;
   PImage frameAnterior;
+  IntList movimentoDetectado;
   
   // Construtor, incializa a camera e verifica se eh possivel ser utilizado
   cameraInput(exemplo ambiente){
@@ -18,11 +19,24 @@ class cameraInput {
         this.cameraPrincipal = new Capture(ambiente,320,240,30);
         this.cameraPrincipal.start();
         this.frameAnterior = createImage(this.cameraPrincipal.width, this.cameraPrincipal.height, RGB);
+        this.movimentoDetectado = new IntList();
     }
   }
   // Funcao que guarda o frame para ser calculado a diferenca depois
   void capturaFrame(){
     //this.frameAnterior = createImage(this.cameraPrincipal.width, this.cameraPrincipal.height, RGB);
+  }
+  // pega o pixel de movimento detectado tratado como pilha
+  int getPixelDetectado(){
+    int retorno;  
+    if(this.movimentoDetectado.size() > 0 ){
+      retorno = this.movimentoDetectado.get(0);
+      this.movimentoDetectado.remove(0);
+    }
+    else{
+      retorno = -1;
+    }
+    return retorno;
   }
 
 
@@ -39,7 +53,6 @@ class cameraInput {
     color atual;      
     color anterior; 
     float diferenca;
-    boolean movimentoDetectado = false;
     // Carregando pixels
     loadPixels();
     this.cameraPrincipal.loadPixels();
@@ -58,7 +71,8 @@ class cameraInput {
         b2 = blue(anterior);         
         diferenca = dist(r1,g1,b1,r2,g2,b2);
         if(diferenca > 30){
-          movimentoDetectado = true;
+          //print("\tLOC =",loc,"\n");
+          this.movimentoDetectado.append(loc);
           pixelsDiferentes++;
         }
       }
