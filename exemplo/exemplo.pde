@@ -5,6 +5,13 @@ ArrayList<Cell> comidas;
 //Camera Objeot
 cameraInput camera;
 
+boolean delayFlag = false;
+
+void delayUmaVez(){
+  delay(5000);
+  delayFlag = true;
+}
+
 /* ################################ SETUP #############################*/
 void setup(){
   size(1200, 625,P2D);
@@ -75,6 +82,9 @@ void setup(){
  
 /*############################## DRAW *********************************/
 void draw(){
+  //Delay
+  if(!delayFlag)
+    delayUmaVez();
   background(0, 0, 10); 
   for(Cell cell: cells){
     cell.display();
