@@ -39,7 +39,6 @@ class Cell {
   
   
   void celularDeath(){
-    print("\tMORRI!\n");
     this.energy = 0;
     this.estaVivo = false;
     cellsAlive.remove(this);
