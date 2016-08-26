@@ -2,6 +2,7 @@ ArrayList<Cell> cells;
 ArrayList<Cell> cellsAlive;
 ArrayList<Cell> comidas;
 
+
 //Camera Objeot
 cameraInput camera;
 

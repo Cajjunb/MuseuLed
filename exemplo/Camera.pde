@@ -1,6 +1,7 @@
 import processing.video.*;
 // Importando biblioteca de video
 
+
 class cameraInput {
   
   //Camera Objeot
@@ -10,17 +11,17 @@ class cameraInput {
   
   // Construtor, incializa a camera e verifica se eh possivel ser utilizado
   cameraInput(exemplo ambiente){
-    String[] cameras = Capture.list();
-    if(cameras.length == 0){
-      println("\tERRO nao temos cameras no momento!\n");
-      exit();
-    }
-    else{
+    //String[] cameras = Capture.list();
+    //if(cameras.length == 0){
+    //  println("\tERRO nao temos cameras no momento!\n");
+    //  exit();
+    //}
+    //else{
         this.cameraPrincipal = new Capture(ambiente,320,240,30);
         this.cameraPrincipal.start();
         this.frameAnterior = createImage(this.cameraPrincipal.width, this.cameraPrincipal.height, RGB);
         this.movimentoDetectado = new IntList();
-    }
+    //}
   }
   // Funcao que guarda o frame para ser calculado a diferenca depois
   void capturaFrame(){
