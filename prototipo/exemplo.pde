@@ -9,7 +9,7 @@ cameraInput camera;
 boolean delayFlag = false;
 
 void delayUmaVez(){
-  delay(5000);
+  delay(7000);
   delayFlag = true;
 }
 
@@ -105,18 +105,15 @@ void pre(){
   }  
   
   /*Detecta movimento e faz com que apareca celulas!*/
-  if(camera.cameraMovimento())
-   cells.get(int(random(cells.size()))).fillUpEnergy();
-  
-  /*// Apos o tracking faz ficar vivas os pixels que tem movimento detectado
-  auxPixel = ((camera.getPixelDetectado()) * 625 / camera.cameraPrincipal.width * 25);
-  while(auxPixel > -1){
-    cells.get(auxPixel).fillUpEnergy();
-    auxPixel = ((camera.getPixelDetectado()) * 625 / camera.cameraPrincipal.width*25);
+  if(camera.cameraMovimento()){
+    cells.get(int(random(cells.size()))).fillUpEnergy();
+    //Apos o tracking faz ficar vivas os pixels que tem movimento detectado
+    //auxPixel = ((camera.getPixelDetectado()) * 625 / camera.cameraPrincipal.width * 25);
+    //while(auxPixel > -1){
+    //  cells.get(auxPixel).fillUpEnergy();
+    //  auxPixel = ((camera.getPixelDetectado()) * 625 / camera.cameraPrincipal.width*25);
+    //}  
   }
-  */
-  
-  
   
   /*for(int i = comidas.size() - 1; i >= 0; i-- ){
     comidas.get(i).expireFood();
