@@ -1,4 +1,4 @@
-ArrayList<Cell> cells;
+ ArrayList<Cell> cells;
 ArrayList<Cell> cellsAlive;
 ArrayList<Cell> comidas;
 
@@ -17,7 +17,7 @@ void delayUmaVez(){
 void setup(){
   size(1200, 625,P2D);
   smooth();
-  frameRate(40);
+  frameRate(20);
   colorMode(HSB, 360, 100, 100);
    
   //Instancia o controlador da camera 
@@ -102,7 +102,6 @@ void pre(){
   int auxPixel ;
   if(random(100.0)<1){
     cells.get(aux).becomeFoodCell();
-    print("\t CRIEI COMIDA i =  ",aux/25," j = ",aux%25,"\n");
   }  
   
   /*Detecta movimento e faz com que apareca celulas!*/
