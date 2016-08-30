@@ -1,20 +1,45 @@
 import processing.io.*;
 boolean ledOn = false;
 
+// GPIO numbers refer to different phyiscal pins on various boards
+// On the Raspberry Pi GPIO 4 is physical pin 7 on the header
+// see setup.png in the sketch folder for wiring details
+
 void setup() {
-  GPIO.pinMode(7,GPIO.OUTPUT);
-  frameRate(0.6);
+  //GPIO SETTINGS
+  GPIO.pinMode(4, GPIO.OUTPUT);
+  GPIO.pinMode(5, GPIO.OUTPUT);
+  GPIO.pinMode(6, GPIO.OUTPUT);
 }
 
-void Draw(){
-  ledOn = !ledOn;
-  if(ledOn){
-    GPIO.digitalWrite(7,GPIO.LOW);
-    fill(204);
-  }else{
-    GPIO.digitalWrite(7,GPIO.HIGH);
-    fill(255);
+void draw() {
+  //LOOP1
+  for(int i = 0 ;  i < 8 ; i++){
+    //HIGH Ouput 
+    GPIO.digitalWrite(4,GPIO.HIGH);
+    delay(100);
+    //CLOCK0 TRANSICAO HIGH LOW 
+    GPIO.digitalWrite(5,GPIO.HIGH);
+    delay(100);
+    GPIO.digitalWrite(5,GPIO.LOW);
+    //LIMPA Ouput e aciona o o shift
+    GPIO.digitalWrite(4,GPIO.LOW);
+    GPIO.digitalWrite(6,GPIO.HIGH);
+    delay(100);
+    GPIO.digitalWrite(6,GPIO.LOW);  
   }
-  stroke(255);
-  rect(width/2,height/2,width*0.75,height*0.75);
+  for(int i = 0 ;  i < 8 ; i++){
+    //Limpa o Output
+    GPIO.digitalWrite(4,GPIO.LOW);
+    delay(100);
+    //CLOCK0 TRANSICAO HIGH LOW 
+    GPIO.digitalWrite(5,GPIO.HIGH);
+    delay(100);
+    GPIO.digitalWrite(5,GPIO.LOW);
+    // Mantem ouput low e aciona o shift
+    GPIO.digitalWrite(4,GPIO.LOW);
+    GPIO.digitalWrite(6,GPIO.HIGH);
+    delay(100);
+    GPIO.digitalWrite(6,GPIO.LOW);  
+  }
 }
