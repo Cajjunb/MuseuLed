@@ -32,7 +32,6 @@ class HardwareInterface{
   
   //Output simples do proximo bit em ordem sequencial
   void mandaUmBitData(boolean dataBit){
-    this.dataOutput = dataBit;
     
   }
   

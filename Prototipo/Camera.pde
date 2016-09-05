@@ -10,7 +10,7 @@ class cameraInput {
   IntList movimentoDetectado;
   
   // Construtor, incializa a camera e verifica se eh possivel ser utilizado
-  cameraInput(exemplo ambiente){
+  cameraInput(Prototipo ambiente){
     //String[] cameras = Capture.list();
     //if(cameras.length == 0){
     //  println("\tERRO nao temos cameras no momento!\n");
