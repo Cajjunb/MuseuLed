@@ -1,7 +1,7 @@
 import processing.video.*;
 // Importando biblioteca de video
 
-
+// DECLARACAO DA CLASSE DE CAMERA QUE TRATA E FAZ INTERFACE COM OUTROS MODULOS
 class cameraInput {
   
   //Camera Objeot
@@ -27,7 +27,7 @@ class cameraInput {
   void capturaFrame(){
     //this.frameAnterior = createImage(this.cameraPrincipal.width, this.cameraPrincipal.height, RGB);
   }
-  // pega o pixel de movimento detectado tratado como pilha
+  // pega o pixel de movimento detectado tratado como fila
   int getPixelDetectado(){
     int retorno;  
     if(this.movimentoDetectado.size() > 0 ){
@@ -54,6 +54,8 @@ class cameraInput {
     color atual;      
     color anterior; 
     float diferenca;
+    boolean movimentoDetectado = false;
+    
     // Carregando pixels
     loadPixels();
     this.cameraPrincipal.loadPixels();
@@ -73,12 +75,17 @@ class cameraInput {
         diferenca = dist(r1,g1,b1,r2,g2,b2);
         if(diferenca > 30){
           //print("\tLOC =",loc,"\n");
-          this.movimentoDetectado.append(loc);
-          pixelsDiferentes++;
+          if(pixelsDiferentes == 1000 ){
+            movimentoDetectado = true;
+            this.movimentoDetectado.append(loc);
+            break;  
+          }else{
+            pixelsDiferentes++;
+          }
         }
       }
     }
-    if (pixelsDiferentes > 100)
+    if (movimentoDetectado)
       return true;
     else
       return false;
