@@ -2,7 +2,6 @@ ArrayList<Cell> cells;
 ArrayList<Cell> cellsAlive;
 ArrayList<Cell> comidas;
 
-
 //Camera Objeot
 cameraInput camera;
 
@@ -76,9 +75,7 @@ void setup(){
   cells.get(551).becomeFoodCell();
   cells.get(221).becomeFoodCell();
   cells.get(419).becomeFoodCell();
-  cells.get(311).becomeFoodCell();
-  
-  
+  cells.get(311).becomeFoodCell(); 
 }
  
 /*############################## DRAW *********************************/
@@ -114,7 +111,6 @@ void pre(){
       auxPixel = ((camera.getPixelDetectado()) * 25 / camera.cameraPrincipal.width)/25;
     }
   }
-  
   /*for(int i = comidas.size() - 1; i >= 0; i-- ){
     comidas.get(i).expireFood();
   }*/
@@ -138,6 +134,4 @@ void pre(){
   for(int i = cellsAlive.size()- 1; i>=0 ; i--){
     cellsAlive.get(i).movimentoRandomico();
   } 
- 
- 
 }
