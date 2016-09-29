@@ -39,17 +39,20 @@ class HardwareInterface{
   boolean mandaTodaData(){
     int bitAux;
     int i;
-    for(i = 0 ;  i < this.limiteBits ; i++){
+    //GPIO.digitalWrite(5,GPIO.LOW);
+    for(i = this.limiteBits-1;  i >= 0 ; i--){
       //Faz o output e faz a transicao do clock
       bitAux = (this.dataOutput[i]) ? GPIO.HIGH : GPIO.LOW;
       GPIO.digitalWrite(4,bitAux);
       //CLOCK0 TRANSICAO HIGH LOW 
-      GPIO.digitalWrite(5,GPIO.HIGH);
-      GPIO.digitalWrite(5,GPIO.LOW);
-      //LIMPA Ouput e aciona o o shift
-      GPIO.digitalWrite(4,GPIO.LOW); 
+      //if(i != this.limiteBits-1){
+        GPIO.digitalWrite(5,GPIO.HIGH);
+        GPIO.digitalWrite(5,GPIO.LOW);
+      //}       
     }
+    print("\tFim LOOP\n");
     //Aciona o latch para mandar isso
+    
     GPIO.digitalWrite(6,GPIO.HIGH);
     GPIO.digitalWrite(6,GPIO.LOW);  
   if(i == this.limiteBits)
