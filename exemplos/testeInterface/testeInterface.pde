@@ -15,7 +15,7 @@ class HardwareInterface{
     this.dataOutput = new boolean[50];
     this.latchOutput = false;
     this.contadorBits = 0 ;
-    this.limiteBits = 50;    
+      this.limiteBits = 50;    
   }
 
   //Construtor que vem o limite de shift register

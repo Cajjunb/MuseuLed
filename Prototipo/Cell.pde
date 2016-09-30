@@ -19,7 +19,7 @@ class Cell {
     this.ehcomida = false;
     this.estaVivo = false;
     pathComida = -1;
-    this. index = 2;
+    this.index = 0;
   }
    
   void addToNeighbors(Cell cell){
@@ -33,7 +33,6 @@ class Cell {
       this.ehcomida = false;
       /*ADICIONANDO PARA REFERENCIA DE CELULAS VIVAS*/
       cellsAlive.add(this);  
-      this. index = 2;
     }
   }
   
@@ -80,24 +79,21 @@ class Cell {
     }
   }  
   
-  void diffuseEnergy(){
+  boolean diffuseEnergy(){
     float diffusedEnergy = energy * 0.1;
+    boolean retorno = false;
     energy -= diffusedEnergy;
-    if(energy < 0.1){
+    if(energy < 0.01){
+      retorno = true;
       this.celularDeath();
     }
     /*for(Cell neighbor: neighbors){
       neighbor.absorbEnergy(diffusedEnergy / 5.0);
-    }
-    */
+    }*/
+    return retorno;
+    
   }
   
-   void reproductCell(){
-    /*for(Cell neighbor: neighbors){
-      neighbor.absorbEnergy(diffusedEnergy / 5.0);
-    }
-    */
-  }
   
     void expireFood(){
       float diffusedEnergy = energy * 0.000001;

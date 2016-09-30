@@ -57,18 +57,16 @@ class HardwareInterface{
   public boolean mandaTodaData(){
     int bitAux;
     int i;
-    GPIO.digitalWrite(5,GPIO.LOW);
-    for(i = this.limiteBits ;  i > 0 ; i--){
+    //GPIO.digitalWrite(5,GPIO.LOW);
+    for(i = this.limiteBits-1;  i >= 0 ; i--){
       //Faz o output e faz a transicao do clock
       bitAux = (this.dataOutput[i]) ? GPIO.HIGH : GPIO.LOW;
       GPIO.digitalWrite(4,bitAux);
       //CLOCK0 TRANSICAO HIGH LOW 
-      if(i != this.limiteBits-1){
+      //if(i != this.limiteBits-1){
         GPIO.digitalWrite(5,GPIO.HIGH);
         GPIO.digitalWrite(5,GPIO.LOW);
-       }   
-       print("\tmandei \u00ab ",bitAux,"i \u00ab",i,"\n");
-    
+      //}       
     }
     print("\tFim LOOP\n");
     //Aciona o latch para mandar isso
@@ -85,12 +83,13 @@ class HardwareInterface{
 HardwareInterface objetoInterface;
 int j = 0;
 public void setup(){
-  objetoInterface = new HardwareInterface(3);
-  objetoInterface.dataOutput[0] = true;
-  for(int i = 1; i < objetoInterface.limiteBits; i++){
-    objetoInterface.dataOutput[i] = false;
-    print("\t",PApplet.parseBoolean(i%1),"\n");
+  objetoInterface = new HardwareInterface(50);
+  for(int i = 0;i < objetoInterface.limiteBits; i++){
+    objetoInterface.dataOutput[i] = false; //boolean(i%2);
   }
+  objetoInterface.dataOutput[0] = true;
+  objetoInterface.mandaTodaData();
+  delay(500);
 }
 
 public void draw(){
@@ -99,9 +98,11 @@ public void draw(){
       //print("\t i \u00ab",i,"\n");
       objetoInterface.dataOutput[(i+1)%objetoInterface.limiteBits] = true;
       objetoInterface.dataOutput[i] = false;
-       break;
-     }
-    
+      print("\t i = ",i+1);
+      //objetoInterface.dataOutput[i+1] = true;
+      break;
+    }
+    //objetoInterface.dataOutput[i] = !objetoInterface.dataOutput[i];
   }
   delay(500);
   objetoInterface.mandaTodaData();

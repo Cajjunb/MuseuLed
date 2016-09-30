@@ -73,7 +73,7 @@ class cameraInput {
         g2 = green(anterior); 
         b2 = blue(anterior);         
         diferenca = dist(r1,g1,b1,r2,g2,b2);
-        if(diferenca > 30){
+        if(diferenca > 300){
           //print("\tLOC =",loc,"\n");
           if(pixelsDiferentes == 1000 ){
             movimentoDetectado = true;
@@ -98,7 +98,7 @@ class cameraInput {
       this.frameAnterior.updatePixels();
       this.cameraPrincipal.read();
     }
-    image(this.cameraPrincipal,625 , 0);
-    image(this.frameAnterior,625,300 );
+    image(this.cameraPrincipal,200 , 0);
+    //image(this.frameAnterior,625,300 );
   }
 }

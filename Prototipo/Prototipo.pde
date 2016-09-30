@@ -2,32 +2,56 @@ ArrayList<Cell> cells;
 ArrayList<Cell> cellsAlive;
 ArrayList<Cell> comidas;
 
+int LARGURA = 10;
+int ALTURA = 5;
+
 //Camera Objeot
 cameraInput camera;
+//INTERFACE DE HARDWARE
+HardwareInterface objetoInterface;
 
-boolean delayFlag = false;
 
-void delayUmaVez(){
-  delay(7000);
-  delayFlag = true;
+int delayFlag = 0;
+
+void delayDuasVezes(){
+  print("\t################### DELAY! ##############\n");
+  noLoop();
+  delay(15000);
+  delayFlag++;
+  loop();
 }
 
 /* ################################ SETUP #############################*/
 void setup(){
-  size(1200, 625,P2D);
+  try{
+      print("\t###################ANTES DE EXCEPTION!####################\n");
+      GPIO.pinMode(4, GPIO.OUTPUT);
+      GPIO.pinMode(5, GPIO.OUTPUT);
+      GPIO.pinMode(6, GPIO.OUTPUT);    
+     }catch(Exception e){
+      print("\t###################EXCEPTION!####################\n");
+      GPIO.pinMode(4, GPIO.OUTPUT);
+      GPIO.pinMode(5, GPIO.OUTPUT);
+      GPIO.pinMode(6, GPIO.OUTPUT);  
+  }
+  size(625, 625,P3D);
+  noLoop();
   smooth();
-  frameRate(20);
+  frameRate(10);
   colorMode(HSB, 360, 100, 100);
-   
+ 
+  
   //Instancia o controlador da camera 
   camera = new cameraInput(this);
+
   
-  Cell[][] cellArray = new Cell[25][25];
-  for(int y = 0; y < 25; y++){
-    for(int x = 0; x < 25; x++){
+  Cell[][] cellArray = new Cell[ALTURA][LARGURA];
+  for(int y = 0; y < ALTURA; y++){
+    for(int x = 0; x < LARGURA; x++){
       //if((y % 2 == 0 && x % 2 == 0) || (y % 2 == 1 && x % 2 == 1)){
-        PVector pos = new PVector(x * 25, y * 25);
+        PVector pos = new PVector(x * LARGURA, y * ALTURA);
         cellArray[y][x] = new Cell(pos);
+        cellArray[y][x].index =  (y*LARGURA) +x;
       //}
     }
   }
@@ -36,8 +60,8 @@ void setup(){
   comidas = new ArrayList<Cell>();
   cellsAlive = new ArrayList<Cell>();
   /*####################### SETANDO ARRAYS GLOBAIS ###############*/
-  for(int y = 0; y < 25; y++){
-    for(int x = 0; x < 25; x++){
+  for(int y = 0; y < ALTURA; y++){
+    for(int x = 0; x < LARGURA; x++){
       //if((y % 2 == 0 && x % 2 == 0) || (y % 2 == 1 && x % 2 == 1)){
         Cell cell = cellArray[y][x];
         cells.add(cell);
@@ -46,7 +70,7 @@ void setup(){
           //Vizinho da esquerda
           cell.addToNeighbors(cellArray[y][x-1]);
         }
-        if(x < 24){
+        if(x < LARGURA-1){
           //Vizinho da direita
           cell.addToNeighbors(cellArray[y][x+1]);
         }
@@ -54,14 +78,12 @@ void setup(){
           //Vizinho de cima
           cell.addToNeighbors(cellArray[y-1][x]);
         }
-        if(y < 24){
+        if(y < ALTURA-1){
           //Vizinho de baixo
           cell.addToNeighbors(cellArray[y+1][x]);
         }
         
-        //colocando o indice no array
-        cell.index = y * 49 + x ;
-       
+       //objetoInterface.dataOutput[y * 25 + x] = false; //boolean(i%2);
     }
   }
   /*for(int i = 0; i < 10; i++){
@@ -71,23 +93,25 @@ void setup(){
   */
   registerMethod("pre", this);
   cells.get(22).fillUpEnergy();
-  cells.get(600).becomeFoodCell();
-  cells.get(551).becomeFoodCell();
-  cells.get(221).becomeFoodCell();
-  cells.get(419).becomeFoodCell();
-  cells.get(311).becomeFoodCell(); 
+  //INTERFACE COM OS LEDS
+  objetoInterface = new HardwareInterface(50);
+  loop();
 }
  
 /*############################## DRAW *********************************/
 void draw(){
   //Delay
-  if(!delayFlag)
-    delayUmaVez();
+  /*while(delayFlag < 3)
+    delayDuasVezes();
+  */
   background(0, 0, 10); 
   for(Cell cell: cells){
+    //Atualiza o valor se estiver vivo
+    objetoInterface.dataOutput[cell.index] = (cell.estaVivo) ? true : false;
     cell.display();
   }
-    
+  
+  objetoInterface.mandaTodaData();
   //camera Objeto desenha os frames da camera
   camera.desenhaCamera();
 }
@@ -97,19 +121,22 @@ void draw(){
 void pre(){
   int aux = int(random(cells.size()));
   int auxPixel ;
-  if(random(100.0)<1){
-    cells.get(aux).becomeFoodCell();
-  }  
+  int random ;
   
+  //if(random(100.0)<1){
+  //  cells.get(aux).becomeFoodCell();
+  //}  
   /*Detecta movimento e faz com que apareca celulas!*/
   if(camera.cameraMovimento()){
-    //cells.get(int(random(cells.size()))).fillUpEnergy();
+    random = int(random(cells.size())) ;
+    cells.get(random).fillUpEnergy();
     // Apos o tracking faz ficar vivas os pixels que tem movimento detectado
-    auxPixel = ((camera.getPixelDetectado()) * 25 / camera.cameraPrincipal.width )/25;
+    /*auxPixel = ((camera.getPixelDetectado()) * 25 / camera.cameraPrincipal.width )/25;
     while(auxPixel > -1){
       cells.get(auxPixel).fillUpEnergy();
       auxPixel = ((camera.getPixelDetectado()) * 25 / camera.cameraPrincipal.width)/25;
     }
+    */
   }
   /*for(int i = comidas.size() - 1; i >= 0; i-- ){
     comidas.get(i).expireFood();
