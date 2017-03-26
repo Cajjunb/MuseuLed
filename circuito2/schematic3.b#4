@@ -665,7 +665,7 @@ design rules under a new name.</description>
 </element>
 </elements>
 <signals>
-<signal name="GNDLED">
+<signal name="GND">
 <contactref element="SHIFT0" pad="8"/>
 <contactref element="SHIFT6" pad="8"/>
 <contactref element="SHIFT6" pad="2"/>
