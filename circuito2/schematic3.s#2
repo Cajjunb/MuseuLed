@@ -853,8 +853,8 @@ Grid 5.00 mm&lt;p&gt;
 <part name="WAGO21" library="con-wago-500" deviceset="W237-102" device=""/>
 <part name="WAGO22" library="con-wago-500" deviceset="W237-102" device=""/>
 <part name="WAGO23" library="con-wago-500" deviceset="W237-102" device=""/>
-<part name="TIP50" library="transistor-power" deviceset="TIP120" device=""/>
-<part name="TIP51" library="transistor-power" deviceset="TIP120" device=""/>
+<part name="TIP48" library="transistor-power" deviceset="TIP120" device=""/>
+<part name="TIP49" library="transistor-power" deviceset="TIP120" device=""/>
 <part name="WAGO24" library="con-wago-500" deviceset="W237-102" device=""/>
 </parts>
 <sheets>
@@ -980,8 +980,8 @@ Grid 5.00 mm&lt;p&gt;
 <instance part="WAGO22" gate="-2" x="165.1" y="-213.36" rot="R270"/>
 <instance part="WAGO23" gate="-1" x="208.28" y="-213.36" rot="R270"/>
 <instance part="WAGO23" gate="-2" x="193.04" y="-213.36" rot="R270"/>
-<instance part="TIP50" gate="1" x="208.28" y="-350.52" rot="MR90"/>
-<instance part="TIP51" gate="1" x="223.52" y="-353.06" rot="MR90"/>
+<instance part="TIP48" gate="1" x="208.28" y="-350.52" rot="MR90"/>
+<instance part="TIP49" gate="1" x="223.52" y="-353.06" rot="MR90"/>
 <instance part="WAGO24" gate="-1" x="228.6" y="-304.8" rot="R270"/>
 <instance part="WAGO24" gate="-2" x="213.36" y="-304.8" rot="R270"/>
 </instances>
@@ -1335,7 +1335,7 @@ Grid 5.00 mm&lt;p&gt;
 <label x="195.58" y="-259.08" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="TIP51" gate="1" pin="E"/>
+<pinref part="TIP49" gate="1" pin="E"/>
 <wire x1="218.44" y1="-350.52" x2="215.9" y2="-350.52" width="0.1524" layer="91"/>
 <label x="215.9" y="-350.52" size="1.778" layer="95"/>
 </segment>
@@ -1376,7 +1376,7 @@ Grid 5.00 mm&lt;p&gt;
 <label x="0" y="-360.68" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="TIP50" gate="1" pin="E"/>
+<pinref part="TIP48" gate="1" pin="E"/>
 <wire x1="203.2" y1="-347.98" x2="193.04" y2="-347.98" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -1496,6 +1496,7 @@ Grid 5.00 mm&lt;p&gt;
 <wire x1="-93.98" y1="15.24" x2="-93.98" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="INPUTPLACA" gate="A" pin="1"/>
 <wire x1="-93.98" y1="53.34" x2="-106.68" y2="53.34" width="0.1524" layer="91"/>
+<label x="-91.44" y="15.24" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$53" class="0">
@@ -1558,7 +1559,7 @@ Grid 5.00 mm&lt;p&gt;
 <segment>
 <pinref part="SHIFT6" gate="A" pin="QA"/>
 <wire x1="35.56" y1="-353.06" x2="208.28" y2="-353.06" width="0.1524" layer="91"/>
-<pinref part="TIP50" gate="1" pin="B"/>
+<pinref part="TIP48" gate="1" pin="B"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -2157,14 +2158,14 @@ Grid 5.00 mm&lt;p&gt;
 </net>
 <net name="N$96" class="0">
 <segment>
-<pinref part="TIP50" gate="1" pin="C"/>
+<pinref part="TIP48" gate="1" pin="C"/>
 <pinref part="WAGO24" gate="-2" pin="KL"/>
 <wire x1="213.36" y1="-347.98" x2="213.36" y2="-309.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$97" class="0">
 <segment>
-<pinref part="TIP51" gate="1" pin="C"/>
+<pinref part="TIP49" gate="1" pin="C"/>
 <pinref part="WAGO24" gate="-1" pin="KL"/>
 <wire x1="228.6" y1="-350.52" x2="228.6" y2="-309.88" width="0.1524" layer="91"/>
 </segment>
@@ -2173,7 +2174,7 @@ Grid 5.00 mm&lt;p&gt;
 <segment>
 <pinref part="SHIFT6" gate="A" pin="QB"/>
 <wire x1="35.56" y1="-355.6" x2="66.04" y2="-355.6" width="0.1524" layer="91"/>
-<pinref part="TIP51" gate="1" pin="B"/>
+<pinref part="TIP49" gate="1" pin="B"/>
 <wire x1="66.04" y1="-355.6" x2="68.58" y2="-355.6" width="0.1524" layer="91"/>
 <wire x1="68.58" y1="-355.6" x2="223.52" y2="-355.6" width="0.1524" layer="91"/>
 </segment>
