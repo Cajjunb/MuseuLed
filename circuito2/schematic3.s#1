@@ -1490,7 +1490,7 @@ Grid 5.00 mm&lt;p&gt;
 <wire x1="-88.9" y1="45.72" x2="-106.68" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="SUPLLY" class="0">
+<net name="VCC" class="0">
 <segment>
 <wire x1="-86.36" y1="15.24" x2="-93.98" y2="15.24" width="0.1524" layer="91"/>
 <wire x1="-93.98" y1="15.24" x2="-93.98" y2="53.34" width="0.1524" layer="91"/>

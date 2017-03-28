@@ -967,7 +967,7 @@ Grid 5.00 mm&lt;p&gt;
 <wire x1="43.18" y1="45.72" x2="200.66" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="GNDLED" class="0">
+<net name="GND" class="0">
 <segment>
 <pinref part="SHIFT6" gate="A" pin="QC"/>
 <wire x1="35.56" y1="-358.14" x2="38.1" y2="-358.14" width="0.1524" layer="91"/>
