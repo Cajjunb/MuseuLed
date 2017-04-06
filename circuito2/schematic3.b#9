@@ -89,8 +89,59 @@
 <hole x="209.55" y="-5.08" drill="1.4"/>
 <hole x="6.35" y="25.4" drill="1.4"/>
 <text x="29.21" y="29.21" size="1.778" layer="48">S-3-4-5-GND</text>
-<text x="55.88" y="20.32" size="1.778" layer="48">GND</text>
+<text x="58.42" y="25.4" size="1.778" layer="48" rot="R270">GND</text>
 <text x="27.94" y="45.72" size="1.778" layer="48" rot="R90">GND</text>
+<text x="55.88" y="21.59" size="1.778" layer="20" rot="R90">JUNCTION</text>
+<text x="27.94" y="-7.62" size="1.778" layer="20">A1</text>
+<text x="33.02" y="-7.62" size="1.778" layer="20">A2</text>
+<text x="39.37" y="-7.62" size="1.778" layer="20">A3</text>
+<text x="44.45" y="-7.62" size="1.778" layer="20">A4</text>
+<text x="52.07" y="-7.62" size="1.778" layer="20">A5</text>
+<text x="57.15" y="-7.62" size="1.778" layer="20">A6</text>
+<text x="62.23" y="-7.62" size="1.778" layer="20">A7</text>
+<text x="67.31" y="-7.62" size="1.778" layer="20">A8</text>
+<text x="63.5" y="27.94" size="1.778" layer="20" rot="R180">A9</text>
+<text x="64.77" y="22.86" size="1.778" layer="20" rot="R180">A10</text>
+<text x="77.47" y="-6.35" size="1.778" layer="20" rot="R180">B1</text>
+<text x="82.55" y="-6.35" size="1.778" layer="20" rot="R180">B2</text>
+<text x="90.17" y="-6.35" size="1.778" layer="20" rot="R180">B3</text>
+<text x="95.25" y="-6.35" size="1.778" layer="20" rot="R180">B4</text>
+<text x="105.41" y="-6.35" size="1.778" layer="20" rot="R180">B5</text>
+<text x="110.49" y="-6.35" size="1.778" layer="20" rot="R180">B6</text>
+<text x="124.46" y="-6.35" size="1.778" layer="20" rot="R180">B7</text>
+<text x="129.54" y="-6.35" size="1.778" layer="20" rot="R180">B8</text>
+<text x="142.24" y="-6.35" size="1.778" layer="20" rot="R180">B9</text>
+<text x="148.59" y="-6.35" size="1.778" layer="20" rot="R180">B10</text>
+<text x="160.02" y="-6.35" size="1.778" layer="20" rot="R180">C1</text>
+<text x="165.1" y="-6.35" size="1.778" layer="20" rot="R180">C2</text>
+<text x="180.34" y="-6.35" size="1.778" layer="20" rot="R180">C3</text>
+<text x="186.69" y="-6.35" size="1.778" layer="20" rot="R180">C4</text>
+<text x="209.55" y="2.54" size="1.778" layer="20" rot="R270">C5</text>
+<text x="210.82" y="17.78" size="1.778" layer="20" rot="R270">C6</text>
+<text x="207.01" y="20.32" size="1.778" layer="20" rot="R270">C7</text>
+<text x="210.82" y="35.56" size="1.778" layer="20" rot="R270">C8</text>
+<text x="207.01" y="38.1" size="1.778" layer="20" rot="R270">C9</text>
+<text x="210.82" y="54.61" size="1.778" layer="20" rot="R270">C10</text>
+<text x="207.01" y="57.15" size="1.778" layer="20" rot="R270">D1</text>
+<text x="209.55" y="71.12" size="1.778" layer="20" rot="R270">D2</text>
+<text x="186.69" y="76.2" size="1.778" layer="20">D3</text>
+<text x="171.45" y="77.47" size="1.778" layer="20">D4</text>
+<text x="170.18" y="73.66" size="1.778" layer="20">D5</text>
+<text x="154.94" y="77.47" size="1.778" layer="20">D6</text>
+<text x="152.4" y="72.39" size="1.778" layer="20">D7</text>
+<text x="137.16" y="76.2" size="1.778" layer="20">D8</text>
+<text x="134.62" y="72.39" size="1.778" layer="20">D9</text>
+<text x="119.38" y="77.47" size="1.778" layer="20">D10</text>
+<text x="118.11" y="73.66" size="1.778" layer="20">E1</text>
+<text x="104.14" y="76.2" size="1.778" layer="20">E2</text>
+<text x="100.33" y="72.39" size="1.778" layer="20">E3</text>
+<text x="86.36" y="76.2" size="1.778" layer="20">E4</text>
+<text x="82.55" y="72.39" size="1.778" layer="20">E5</text>
+<text x="68.58" y="76.2" size="1.778" layer="20">E6</text>
+<text x="64.77" y="73.66" size="1.778" layer="20">E7</text>
+<text x="50.8" y="76.2" size="1.778" layer="20">E8</text>
+<text x="46.99" y="72.39" size="1.778" layer="20">E9</text>
+<text x="31.75" y="73.66" size="1.778" layer="20">E10</text>
 </plain>
 <libraries>
 <library name="74xx-eu">

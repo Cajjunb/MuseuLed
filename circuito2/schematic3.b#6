@@ -72,7 +72,6 @@
 </layers>
 <board>
 <plain>
-<text x="45.72" y="17.78" size="1.778" layer="1">0 a 7</text>
 <text x="54.61" y="-10.16" size="1.778" layer="1">|</text>
 <text x="111.76" y="16.51" size="1.778" layer="1">8 a 15</text>
 <text x="162.56" y="16.51" size="1.778" layer="1">16 a 23</text>
