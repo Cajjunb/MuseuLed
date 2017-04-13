@@ -1,0 +1,6 @@
+DISPLAY ALL
+RATSNEST
+DISPLAY None 
+DISPLAY Top Pads Vias
+EXPORT IMAGE L:\Documentos\2017.1\MediaLab\projetoAura\MuseuLed\circuito2\Impressão\!eagle_export.png MONOCHROME 600;
+DISPLAY Top Unrouted Dimension tPlace bPlace 
