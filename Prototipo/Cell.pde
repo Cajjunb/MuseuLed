@@ -1,3 +1,9 @@
+public enum Direcao {
+    LESTE, NORDESTE, NORTE, NOROESTE,
+    OESTE, SUDOESTE, SUL, SUDESTE 
+}
+
+
 
 /*CLASSE CELULA*/
 class Cell {
@@ -8,6 +14,7 @@ class Cell {
   float absorbedEnergy;
   boolean ehcomida;
   boolean estaVivo;
+  boolean ehFronteira;
   int pathComida;
   int index;
    
@@ -18,9 +25,15 @@ class Cell {
     absorbedEnergy = 0;
     this.ehcomida = false;
     this.estaVivo = false;
+    this.ehFronteira = false;
     pathComida = -1;
     this.index = 0;
   }
+  
+  Cell( boolean ehFronteira){
+    neighbors = new ArrayList<Cell>();
+    this.ehFronteira = ehFronteira;
+  } 
    
   void addToNeighbors(Cell cell){
     neighbors.add(cell);
@@ -35,7 +48,32 @@ class Cell {
       cellsAlive.add(this);  
     }
   }
-  
+  //Movimenta a celula 
+  void movimentaCelula(Direcao direcao){
+      Cell vizinho = new Cell(true) ;
+      if(direcao == Direcao.LESTE){
+          //Vizinho da esquerda
+          vizinho = this.neighbors.get(0)  ;   
+      }
+      else if(direcao == Direcao.OESTE){
+          //Vizinho da direita
+          vizinho = this.neighbors.get(1)  ;
+      }
+      else if(direcao == Direcao.NORTE){
+          //Vizinho de cima
+          vizinho = this.neighbors.get(2)  ;
+      }
+      else if(direcao == Direcao.SUL){
+          //Vizinho do sul
+          vizinho = this.neighbors.get(3)  ;
+      }
+      if(!vizinho.ehFronteira){
+          vizinho.fillUpEnergy();
+          this.pathComida = vizinho.pathComida;
+          this.celularDeath();
+      }
+      return;
+  }
   
   void celularDeath(){
     this.energy = 0;
@@ -47,7 +85,7 @@ class Cell {
   void movimentoRandomico(){
     if(this.pathComida == -1){
       for(Cell vizinho: this.neighbors){
-        if(random(5.0) < 0.5){
+        if(random(5.0) < 0.5 && !vizinho.ehFronteira){
           vizinho.fillUpEnergy();
           this.pathComida = vizinho.pathComida;
           this.celularDeath();
